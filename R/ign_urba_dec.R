@@ -8,6 +8,7 @@
 #'
 #' @importFrom stringr str_sub
 #' @importFrom purrr walk2
+#' @importFrom utils unzip
 #'
 #' @examples
 #' \dontrun{

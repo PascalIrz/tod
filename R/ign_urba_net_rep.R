@@ -10,6 +10,9 @@
 #' @importFrom stringr str_sub str_locate_all
 #'
 #' @examples
+#' \dontrun{
+#' ign_urba_net_rep(repertoire = "raw_data/prescription_surf")
+#' }
 ign_urba_net_rep <- function(repertoire, seuil_ko = 10) {
 
   shapefiles <- list.files(repertoire,

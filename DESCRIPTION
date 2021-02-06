@@ -14,7 +14,8 @@ Imports: curl,
     dplyr,
     magrittr,
     purrr,
-    stringr
+    stringr,
+    utils
 Suggests: 
     knitr,
     rmarkdown
