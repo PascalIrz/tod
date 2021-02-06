@@ -6,7 +6,7 @@ Author: Pascal Irz <pascal.irz@ofb.gouv.fr>
 Maintainer: Pascal Irz <pascal.irz@ofb.gouv.fr>
 Description: The name tod stands for "telechargement open data". Package facilitant l'accès
     à des sources de données ouvertes.
-License: GPL-3
+License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1

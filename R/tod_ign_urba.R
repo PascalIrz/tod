@@ -8,6 +8,10 @@
 #'     dans le même répertoire seraient écrasés.
 #'
 #' @param couche Texte. Nom de la couche à télécharger.
+#' @param ymin Numérique. Latitude minimale de l'emprise géographique en WGS84 (degrés, point décimal).
+#' @param xmin Numérique. Longitude minimale de l'emprise géographique en WGS84 (degrés, point décimal).
+#' @param ymax Numérique. Latitude maximale de l'emprise géographique en WGS84 (degrés, point décimal).
+#' @param xmax Numérique. Longitude maximale de l'emprise géographique en WGS84 (degrés, point décimal).
 #' @param index_debut Numérique. Index du premier des éléments géographiques à télécharger.
 #' @param nb_elements_par_telech Numérique. Nombre d'éléments à télécharger par paquet.
 #' @param n_tot_elements_a_telech Numérique. Si l'on le connaît, le nombre total d'éléments
@@ -25,23 +29,30 @@
 #'
 #' @examples
 #' \dontrun{
-#' req_api_geo_urba(couche = "wfs_du:prescription_lin",
-#' repertoire = "raw_data/req_api_geo_urba")
+#' tod_ign_urba(couche = "prescription_lin",
+#' xmin = -7,
+#' ymin = 47,
+#' xmax = -2,
+#' ymax = 48,
+#' repertoire = "raw_data/tod_ign_urba")
 #' }
-req_api_geo_urba <- function(couche, index_debut = 0, nb_elements_par_telech = 10000,
+tod_ign_urba <- function(couche,
+                             ymin, xmin, ymax, xmax,
+                             index_debut = 0, nb_elements_par_telech = 10000,
                              n_tot_elements_a_telech = 1e6, repertoire = NA)
 
 {
 
-  url_base_1 <- "https://wxs-gpu.mongeoportail.ign.fr/externe/39wtxmgtn23okfbbs1al2lz3/wfs?service=WFS&request=GetFeature&version=2.0.0&typeNames="
-  url_base_2 <- "&srsName=EPSG:4326&BBOX=44,2,47,8,urn:ogc:def:crs:EPSG::4326&startindex="
-  url_base_3 <- "&count="
-  url_base_4 <- "&outputformat=SHAPE-ZIP"
+  url_base_1 <- "https://wxs-gpu.mongeoportail.ign.fr/externe/39wtxmgtn23okfbbs1al2lz3/wfs?service=WFS&request=GetFeature&version=2.0.0&typeNames=wfs_du:"
+  url_base_2 <- "&srsName=EPSG:4326&BBOX="
+  url_base_3 <- ",urn:ogc:def:crs:EPSG::4326&startindex="
+  url_base_4 <- "&count="
+  url_base_5 <- "&outputformat=SHAPE-ZIP"
 
   # Répertoire de stockage des données. S'il n'est pas spécifié, il est nommé d'après la couche et éventuellement créé
   if(is.na(repertoire))
   {
-    repertoire <- paste0("raw_data/", str_sub(couche, start = 8))
+    repertoire <- paste0("raw_data/", couche)
   }
 
   if(dir.exists(repertoire) == FALSE) dir.create(repertoire)
@@ -53,7 +64,11 @@ req_api_geo_urba <- function(couche, index_debut = 0, nb_elements_par_telech = 1
     format(scientific = FALSE) %>% # sinon les écritures comme 1e5 font planter la requête
     str_trim(side = "both") # nettoyage des espaces qui traînent
 
-  requetes <- paste0(url_base_1, couche, url_base_2, startindexes, url_base_3, nb_elements_par_telech, url_base_4)
+  requetes <- paste0(url_base_1, couche,
+                     url_base_2, ymin, ",", xmin, ",", ymax, ",", xmax,
+                     url_base_3, startindexes,
+                     url_base_4, nb_elements_par_telech,
+                     url_base_5)
 
   indices <- 1:length(requetes)
   chemins <- paste0(repertoire, "/fichier_", indices, ".zip")
@@ -68,6 +83,3 @@ req_api_geo_urba <- function(couche, index_debut = 0, nb_elements_par_telech = 1
 
 
 }
-
-
-
