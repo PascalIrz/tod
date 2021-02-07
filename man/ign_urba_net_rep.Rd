@@ -4,7 +4,7 @@
 \alias{ign_urba_net_rep}
 \title{Nettoyer les répertoires de données brutes (suppression des shapefiles vides).}
 \usage{
-ign_urba_net_rep(repertoire, seuil_ko = 10)
+ign_urba_net_rep(repertoire, seuil_ko = 2)
 }
 \arguments{
 \item{repertoire}{Texte. Chemin vers le répertoire où sont stockés les shapefiles.}

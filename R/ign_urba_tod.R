@@ -29,17 +29,17 @@
 #'
 #' @examples
 #' \dontrun{
-#' tod_ign_urba(couche = "prescription_lin",
+#' ign_urba_tod(couche = "prescription_lin",
 #' xmin = -7,
 #' ymin = 47,
 #' xmax = -2,
 #' ymax = 48,
-#' repertoire = "raw_data/tod_ign_urba")
+#' repertoire = "raw_data/prescription_lin")
 #' }
-tod_ign_urba <- function(couche,
-                             ymin, xmin, ymax, xmax,
-                             index_debut = 0, nb_elements_par_telech = 10000,
-                             n_tot_elements_a_telech = 1e6, repertoire = NA)
+ign_urba_tod <- function(couche,
+                         ymin, xmin, ymax, xmax,
+                         index_debut = 0, nb_elements_par_telech = 10000,
+                         n_tot_elements_a_telech = 1e6, repertoire = NA)
 
 {
 
@@ -73,7 +73,7 @@ tod_ign_urba <- function(couche,
   indices <- 1:length(requetes)
   chemins <- paste0(repertoire, "/fichier_", indices, ".zip")
 
-  # Coucle sur les batch
+  # Boucle sur les batch
   for(i in indices[1:length(indices)]) {
 
     curl_download(url = requetes[i], destfile = chemins[i]) # NB download.file() ne fonctionnait pas (timeout)

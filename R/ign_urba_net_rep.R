@@ -13,7 +13,7 @@
 #' \dontrun{
 #' ign_urba_net_rep(repertoire = "raw_data/prescription_surf")
 #' }
-ign_urba_net_rep <- function(repertoire, seuil_ko = 10) {
+ign_urba_net_rep <- function(repertoire, seuil_ko = 2) {
 
   shapefiles <- list.files(repertoire,
                            pattern = ".shp$",

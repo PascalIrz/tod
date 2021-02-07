@@ -11,7 +11,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' ign_urba_lire_shapes(repertoire = "raw_data/prescription_surf")
+#' sf_liste <- ign_urba_lire_shapes(repertoire = "raw_data/prescription_surf")
 #' }
 ign_urba_lire_shapes <- function(repertoire)
 
