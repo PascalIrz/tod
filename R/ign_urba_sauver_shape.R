@@ -10,10 +10,10 @@
 #'
 #' @examples
 #' \dontrun{
-#' ign_urba_sauve_shape(objet_sf = assemblage,
+#' ign_urba_sauver_shape(objet_sf = assemblage,
 #' chemin = "processed_data/prescription_lin.shp")
 #' }
-ign_urba_sauve_shape <- function(objet_sf, chemin)
+ign_urba_sauver_shape <- function(objet_sf, chemin)
 
           {
 
