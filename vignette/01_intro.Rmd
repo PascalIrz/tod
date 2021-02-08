@@ -1,0 +1,23 @@
+---
+title: "Package {tod} - Introduction"
+author: "Pascal Irz"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Package {tod} - Introduction}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Présentation du package
+
+Ce package est nommé {tod} qui sont les initiales de "télécharger open data". A terme, il fournira un jeu assez fourni de fonctionalités pour importer des jeux de données ouvertes et leur appliquer des mises en formes minimales.
+
+Pour le moment, 

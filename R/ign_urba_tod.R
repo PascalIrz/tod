@@ -1,4 +1,4 @@
-#' Télécharger des couches shapefile depuis le géoportail de l'urbanisme.
+#' Télécharger des données depuis le géoportail de l'urbanisme.
 #'
 #' Si l'emprise géographique est vaste, le nombre d'éléments géographiques excède la
 #'     limite de l'API (10 000), auquel cas le téléchargement est effectué par "paquets"
@@ -38,6 +38,7 @@
 #' }
 ign_urba_tod <- function(couche,
                          ymin, xmin, ymax, xmax,
+    #                     scr =   4326,
                          index_debut = 0, nb_elements_par_telech = 10000,
                          n_tot_elements_a_telech = 1e6, repertoire = NA)
 
@@ -45,9 +46,12 @@ ign_urba_tod <- function(couche,
 
   url_base_1 <- "https://wxs-gpu.mongeoportail.ign.fr/externe/39wtxmgtn23okfbbs1al2lz3/wfs?service=WFS&request=GetFeature&version=2.0.0&typeNames=wfs_du:"
   url_base_2 <- "&srsName=EPSG:4326&BBOX="
-  url_base_3 <- ",urn:ogc:def:crs:EPSG::4326&startindex="
-  url_base_4 <- "&count="
-  url_base_5 <- "&outputformat=SHAPE-ZIP"
+  url_base_3 <- ",urn:ogc:def:crs:EPSG::"
+  url_base_4 <- "&startindex="
+  url_base_5 <- "&count="
+  url_base_6 <- "&outputformat=SHAPE-ZIP"
+
+  scr <- 4326
 
   # Répertoire de stockage des données. S'il n'est pas spécifié, il est nommé d'après la couche et éventuellement créé
   if(is.na(repertoire))
@@ -66,9 +70,10 @@ ign_urba_tod <- function(couche,
 
   requetes <- paste0(url_base_1, couche,
                      url_base_2, ymin, ",", xmin, ",", ymax, ",", xmax,
-                     url_base_3, startindexes,
-                     url_base_4, nb_elements_par_telech,
-                     url_base_5)
+                     url_base_3, scr,
+                     url_base_4, startindexes,
+                     url_base_5, nb_elements_par_telech,
+                     url_base_6)
 
   indices <- 1:length(requetes)
   chemins <- paste0(repertoire, "/fichier_", indices, ".zip")

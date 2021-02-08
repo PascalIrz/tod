@@ -4,10 +4,13 @@
 \alias{ign_urba_sauver_shape}
 \title{Exporter un objet de classe sf en shapefile.}
 \usage{
-ign_urba_sauver_shape(objet_sf, chemin)
+ign_urba_sauver_shape(objet_sf, scr = NA, chemin)
 }
 \arguments{
 \item{objet_sf}{L'objet sf à exporter.}
+
+\item{scr}{Numérique. Numéro EPSG du système de coordonnées. La valeur par défaut
+est 4326, ce qui correspond au WGS84.}
 
 \item{chemin}{Texte. Chemin vers le fichier suivi du nom du fichier avec son expension .shp.}
 }
@@ -19,7 +22,9 @@ Exporter un objet de classe sf en shapefile.
 }
 \examples{
 \dontrun{
+# Sauvegarde en Lambert 93 (code EPSG 2154)
 ign_urba_sauver_shape(objet_sf = assemblage,
+scr = 2154,
 chemin = "processed_data/prescription_lin.shp")
 }
 }
