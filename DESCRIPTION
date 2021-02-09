@@ -12,6 +12,8 @@ LazyData: true
 RoxygenNote: 7.1.1
 Imports: curl,
     dplyr,
+    jsonlite,
+    lubridate,
     magrittr,
     purrr,
     rgdal,
