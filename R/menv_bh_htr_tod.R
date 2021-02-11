@@ -7,7 +7,8 @@
 #'     "bh" pour la banque HYDRO, "htr" pour "hydrologie temps réel" et "tod" pour
 #'     "téléchargement open data".
 #'
-#' @param code_entite Voir lien ci-dessus.
+#' @param bbox Voir lien ci-dessus.
+#' @param code_entite Idem.
 #' @param cursor Idem.
 #' @param date_debut_obs Idem.
 #' @param date_fin_obs Idem.
@@ -29,7 +30,7 @@
 #' @examples
 #' \dontrun{
 #' debits <- menv_bh_htr_tod(code_entite = "J7010610",
-#'                          grandeur_hydro = "Q",
+#'                           grandeur_hydro = "Q",
 #'                           timestep = 60) %>%
 #'   mutate(date_obs = lubridate::ymd_hms(date_obs) %>% as.Date())
 #'
@@ -39,7 +40,8 @@
 #'   scale_x_date(date_labels = "%d/%m")
 #' }
 menv_bh_htr_tod <-
-  function(code_entite = NULL,
+  function(bbox = NULL,
+           code_entite = NULL,
            cursor = NULL,
            date_debut_obs = NULL,
            date_fin_obs = NULL,
@@ -48,7 +50,7 @@ menv_bh_htr_tod <-
            grandeur_hydro = NULL,
            latitude = NULL,
            longitude = NULL,
-           size = 10000,
+           size = 20000,
            sort = NULL,
            timestep = NULL) {
     url_base <-
@@ -57,6 +59,7 @@ menv_bh_htr_tod <-
     data <- httr::GET(
       url_base,
       query = list(
+        bbox = bbox,
         code_entite = code_entite,
         cursor = cursor,
         date_debut_obs = date_debut_obs,
@@ -81,5 +84,3 @@ menv_bh_htr_tod <-
       .$data
 
   }
-
-

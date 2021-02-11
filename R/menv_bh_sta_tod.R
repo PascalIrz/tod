@@ -4,7 +4,7 @@
 #'     https://hubeau.eaufrance.fr/page/api-hydrometrie#/hydrometrie/sites
 #'
 #' @param bbox Voir lien ci-dessus.
-#' @param code_commune_site Voir lien ci-dessus.
+#' @param code_commune_site Idem.
 #' @param code_cours_eau Idem.
 #' @param code_departement Idem.
 #' @param code_region Idem.
@@ -81,5 +81,3 @@ menv_bh_sta_tod <-
       .$data
 
   }
-
-

@@ -26,7 +26,7 @@ menv_bh_sta_tod(
 \arguments{
 \item{bbox}{Voir lien ci-dessus.}
 
-\item{code_commune_site}{Voir lien ci-dessus.}
+\item{code_commune_site}{Idem.}
 
 \item{code_cours_eau}{Idem.}
 

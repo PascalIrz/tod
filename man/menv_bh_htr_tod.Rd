@@ -5,6 +5,7 @@
 \title{Télécharger les données hydrologiques en temps réel sur une station.}
 \usage{
 menv_bh_htr_tod(
+  bbox = NULL,
   code_entite = NULL,
   cursor = NULL,
   date_debut_obs = NULL,
@@ -14,13 +15,15 @@ menv_bh_htr_tod(
   grandeur_hydro = NULL,
   latitude = NULL,
   longitude = NULL,
-  size = 10000,
+  size = 20000,
   sort = NULL,
   timestep = NULL
 )
 }
 \arguments{
-\item{code_entite}{Voir lien ci-dessus.}
+\item{bbox}{Voir lien ci-dessus.}
+
+\item{code_entite}{Idem.}
 
 \item{cursor}{Idem.}
 
@@ -59,7 +62,7 @@ Le nom de la fonction correspond à "menv" pour la source, le ministère de l'en
 \examples{
 \dontrun{
 debits <- menv_bh_htr_tod(code_entite = "J7010610",
-                         grandeur_hydro = "Q",
+                          grandeur_hydro = "Q",
                           timestep = 60) \%>\%
   mutate(date_obs = lubridate::ymd_hms(date_obs) \%>\% as.Date())
 
