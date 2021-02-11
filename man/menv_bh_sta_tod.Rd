@@ -5,6 +5,7 @@
 \title{Collecter les informations de base sur les stations de mesure.}
 \usage{
 menv_bh_sta_tod(
+  bbox = NULL,
   code_commune_site = NULL,
   code_cours_eau = NULL,
   code_departement = NULL,
@@ -23,6 +24,8 @@ menv_bh_sta_tod(
 )
 }
 \arguments{
+\item{bbox}{Voir lien ci-dessus.}
+
 \item{code_commune_site}{Voir lien ci-dessus.}
 
 \item{code_cours_eau}{Idem.}

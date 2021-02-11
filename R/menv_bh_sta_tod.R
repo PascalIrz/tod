@@ -3,6 +3,7 @@
 #' Tous les paramètres sont décrits sur la page de l'API :
 #'     https://hubeau.eaufrance.fr/page/api-hydrometrie#/hydrometrie/sites
 #'
+#' @param bbox Voir lien ci-dessus.
 #' @param code_commune_site Voir lien ci-dessus.
 #' @param code_cours_eau Idem.
 #' @param code_departement Idem.
@@ -30,7 +31,8 @@
 #' donnees_stations <- menv_bh_sta_tod(code_region = 53)
 #' }
 menv_bh_sta_tod <-
-  function(code_commune_site = NULL,
+  function(bbox = NULL,
+           code_commune_site = NULL,
            code_cours_eau = NULL,
            code_departement = NULL,
            code_region = NULL,
@@ -51,6 +53,7 @@ menv_bh_sta_tod <-
     data <- httr::GET(
       url_base,
       query = list(
+        bbox = bbox,
         code_commune_site = code_commune_site,
         code_cours_eau = code_cours_eau,
         code_departement = code_departement,

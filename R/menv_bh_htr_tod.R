@@ -1,69 +1,85 @@
-#' Télécharger les données hydrologiques en temps réel sur une station. Plus d'informations sur
+#' Télécharger les données hydrologiques en temps réel sur une station.
+#'
+#' Plus d'informations sur
 #'     https://hubeau.eaufrance.fr/page/api-hydrometrie#/hydrometrie/observations
 #'
 #' Le nom de la fonction correspond à "menv" pour la source, le ministère de l'environnement,
 #'     "bh" pour la banque HYDRO, "htr" pour "hydrologie temps réel" et "tod" pour
 #'     "téléchargement open data".
 #'
-#' @param station_id Caractères. Identifiant de la station comme "J7010610".
-#' @param mesure Texte. Grandeur mesurée qui peut prendre les valeurs "Q" pour le débit ou
-#'     "H" pour les hauteurs d'eau.
-#' @param debut Caractère. Date de début de la série au format "jj/mm/aaaa". Par défaut le
-#'     paramètre fait remonter sur une semaine à partir de l'argument 'fin'.
-#' @param fin Caractère. Date de fin de la série au format "jj/mm/aaaa". Par défaut c'est la
-#'     date du jour selon l'horloge interne de la machine.
+#' @param code_entite Voir lien ci-dessus.
+#' @param cursor Idem.
+#' @param date_debut_obs Idem.
+#' @param date_fin_obs Idem.
+#' @param distance Idem.
+#' @param fields Idem.
+#' @param grandeur_hydro Idem.
+#' @param latitude Idem.
+#' @param longitude Idem.
+#' @param size Idem.
+#' @param sort Idem.
+#' @param timestep Idem.
 #'
-#' @return Dataframe.
+#' @return Un dataframe avec les données téléchargées.
 #' @export
 #'
-#' @importFrom lubridate dmy ymd_hms
+#' @importFrom httr GET warn_for_status stop_for_status content
 #' @importFrom jsonlite fromJSON
-#' @importFrom dplyr filter mutate select
 #'
 #' @examples
 #' \dontrun{
-#' data_sta <- menv_bh_htr_tod(station_id = "J7010610")
-#' ggplot(data = data_sta, aes(x = date_obs, y = resultat_obs)) +
-#' geom_point()
+#' debits <- menv_bh_htr_tod(code_entite = "J7010610",
+#'                          grandeur_hydro = "Q",
+#'                           timestep = 60) %>%
+#'   mutate(date_obs = lubridate::ymd_hms(date_obs) %>% as.Date())
+#'
+#' debits %>% filter(grandeur_hydro == "Q") %>%
+#'   ggplot(aes(x = date_obs, y = resultat_obs)) +
+#'   geom_point() +
+#'   scale_x_date(date_labels = "%d/%m")
 #' }
 menv_bh_htr_tod <-
-  function(station_id,
-           mesure = "Q",
-           debut = NA,
-           fin = NA)
-
-  {
-    data <- data.frame()
-
-    if (is.na(fin))
-      fin <- Sys.Date() %>% format("%d/%m/%Y")
-    if (is.na(debut))
-      debut <- (Sys.Date() - 7) %>% format("%d/%m/%Y")
-
-    dates <- seq.Date(from = lubridate::dmy(debut),
-                      to = lubridate::dmy(fin),
-                      by = "day")
-
+  function(code_entite = NULL,
+           cursor = NULL,
+           date_debut_obs = NULL,
+           date_fin_obs = NULL,
+           distance = NULL,
+           fields = NULL,
+           grandeur_hydro = NULL,
+           latitude = NULL,
+           longitude = NULL,
+           size = 10000,
+           sort = NULL,
+           timestep = NULL) {
     url_base <-
-      "https://hubeau.eaufrance.fr/api/v1/hydrometrie/observations_tr?code_entite="
-    url_sta <- paste0(url_base, station_id)
-    urls <- paste0(url_sta, "&date_fin_obs=", dates)
+      "https://hubeau.eaufrance.fr/api/v1/hydrometrie/observations_tr?"
 
-    for (i in 1:length(dates))
+    data <- httr::GET(
+      url_base,
+      query = list(
+        code_entite = code_entite,
+        cursor = cursor,
+        date_debut_obs = date_debut_obs,
+        date_fin_obs = date_fin_obs,
+        distance = distance,
+        fields = fields,
+        grandeur_hydro = grandeur_hydro,
+        latitude = latitude,
+        longitude = longitude,
+        size = size,
+        sort = sort,
+        timestep = timestep
+      )
+    )
 
-    {
-      data_journaliere <- urls[i] %>%
-        jsonlite::fromJSON() %>%
-        .$data %>%
-        as.data.frame() %>%
-        filter(grandeur_hydro == mesure) %>% # les débits iniquement
-        select(code_site, code_station, date_obs, resultat_obs) %>%
-        mutate(date_obs = ymd_hms(date_obs))
+    httr::warn_for_status(data)
+    httr::stop_for_status(data)
 
-      data <- rbind(data, data_journaliere)
-
-    }
-
-    data
+    data %>%
+      httr::content(as = 'text') %>%
+      jsonlite::fromJSON() %>%
+      .$data
 
   }
+
+

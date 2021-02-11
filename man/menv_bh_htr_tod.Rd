@@ -2,35 +2,70 @@
 % Please edit documentation in R/menv_bh_htr_tod.R
 \name{menv_bh_htr_tod}
 \alias{menv_bh_htr_tod}
-\title{Télécharger les données hydrologiques en temps réel sur une station. Plus d'informations sur
-    https://hubeau.eaufrance.fr/page/api-hydrometrie#/hydrometrie/observations}
+\title{Télécharger les données hydrologiques en temps réel sur une station.}
 \usage{
-menv_bh_htr_tod(station_id, mesure = "Q", debut = NA, fin = NA)
+menv_bh_htr_tod(
+  code_entite = NULL,
+  cursor = NULL,
+  date_debut_obs = NULL,
+  date_fin_obs = NULL,
+  distance = NULL,
+  fields = NULL,
+  grandeur_hydro = NULL,
+  latitude = NULL,
+  longitude = NULL,
+  size = 10000,
+  sort = NULL,
+  timestep = NULL
+)
 }
 \arguments{
-\item{station_id}{Caractères. Identifiant de la station comme "J7010610".}
+\item{code_entite}{Voir lien ci-dessus.}
 
-\item{mesure}{Texte. Grandeur mesurée qui peut prendre les valeurs "Q" pour le débit ou
-"H" pour les hauteurs d'eau.}
+\item{cursor}{Idem.}
 
-\item{debut}{Caractère. Date de début de la série au format "jj/mm/aaaa". Par défaut le
-paramètre fait remonter sur une semaine à partir de l'argument 'fin'.}
+\item{date_debut_obs}{Idem.}
 
-\item{fin}{Caractère. Date de fin de la série au format "jj/mm/aaaa". Par défaut c'est la
-date du jour selon l'horloge interne de la machine.}
+\item{date_fin_obs}{Idem.}
+
+\item{distance}{Idem.}
+
+\item{fields}{Idem.}
+
+\item{grandeur_hydro}{Idem.}
+
+\item{latitude}{Idem.}
+
+\item{longitude}{Idem.}
+
+\item{size}{Idem.}
+
+\item{sort}{Idem.}
+
+\item{timestep}{Idem.}
 }
 \value{
-Dataframe.
+Un dataframe avec les données téléchargées.
 }
 \description{
+Plus d'informations sur
+    https://hubeau.eaufrance.fr/page/api-hydrometrie#/hydrometrie/observations
+}
+\details{
 Le nom de la fonction correspond à "menv" pour la source, le ministère de l'environnement,
     "bh" pour la banque HYDRO, "htr" pour "hydrologie temps réel" et "tod" pour
     "téléchargement open data".
 }
 \examples{
 \dontrun{
-data_sta <- menv_bh_htr_tod(station_id = "J7010610")
-ggplot(data = data_sta, aes(x = date_obs, y = resultat_obs)) +
-geom_point()
+debits <- menv_bh_htr_tod(code_entite = "J7010610",
+                         grandeur_hydro = "Q",
+                          timestep = 60) \%>\%
+  mutate(date_obs = lubridate::ymd_hms(date_obs) \%>\% as.Date())
+
+debits \%>\% filter(grandeur_hydro == "Q") \%>\%
+  ggplot(aes(x = date_obs, y = resultat_obs)) +
+  geom_point() +
+  scale_x_date(date_labels = "\%d/\%m")
 }
 }
