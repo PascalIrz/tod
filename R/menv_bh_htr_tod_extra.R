@@ -15,16 +15,16 @@
 #' @examples
 #' \dontrun{
 #' mes_stations <- c("J7010610", "J4125710")
-#' debits_plusieurs_stations <- menv_bh_htr_tod(stations_id = mes_stations)
+#' debits_plusieurs_stations <- menv_bh_htr_tod_extra(stations_id = mes_stations)
 #' }
-menv_bh_htr_tod <-
+menv_bh_htr_tod_extra <-
   function(stations_id,
            grandeur_hydro = "Q",
            timestep = 60) {
     map(
       .x = stations_id,
       bbox = NULL,
-      .f = menv_bh_htr_tod_base,
+      .f = menv_bh_htr_tod,
       grandeur_hydro = grandeur_hydro,
       timestep = timestep
     ) %>%
