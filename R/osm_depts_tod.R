@@ -32,6 +32,9 @@ osm_depts_tod <- function(url, repertoire) {
         exdir = repertoire)
 
   # Lecture avec rgdal::readOGR() qui gère mieux l'encodage que sf::read_sf()
+  unzip(zipfile = fichier_destination,
+        exdir = repertoire)
+
   shp_depts <- paste0(repertoire, "/departements-20140306-100m.shp")
 
   depts <- rgdal::readOGR(shp_depts, use_iconv = TRUE) %>%
