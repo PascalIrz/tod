@@ -21,7 +21,7 @@ ofb_bnpe_pp_tod(
   nappe_accompagnement = NULL,
   nom_commune = NULL,
   nom_point_prelevement = NULL,
-  page = NULL,
+  page = 1,
   size = 1000
 )
 }
