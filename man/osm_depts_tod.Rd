@@ -12,7 +12,7 @@ osm_depts_tod(url, repertoire)
 \item{repertoire}{Chemin vers le répertoire où le fichier sera stocké.}
 }
 \value{
-Le shapefile des contours de départements.
+Un objet sf polygone des départements.
 }
 \description{
 Cette fonction télécharge depuis la plateforme data.gouv.fr une couche simplifiée
