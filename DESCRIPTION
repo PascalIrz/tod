@@ -18,6 +18,7 @@ Imports: curl,
     magrittr,
     purrr,
     rgdal,
+    rmapshaper,
     sf,
     stringr,
     utils
