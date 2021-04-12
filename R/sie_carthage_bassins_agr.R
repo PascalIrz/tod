@@ -26,9 +26,9 @@
 #' pc_pts_a_garder = 0.01)
 #' }
 sie_carthage_bassins_agr <- function(bassin_geo_poly,
-                                   echelle = c("Zone_Hydro", "Sous_Secteur_Hydro",
+                                     echelle = c("Zone_Hydro", "Sous_Secteur_Hydro",
                                                "Secteur_Hydro", "Region_Hydro"),
-                                   prop_pts_a_garder = 0.05)
+                                     prop_pts_a_garder = 0.05)
 
 {
 
@@ -58,8 +58,9 @@ sie_carthage_bassins_agr <- function(bassin_geo_poly,
 
   entites_hydro <- bassin_geo_poly %>%
     group_by(!!!syms(code), !!!syms(libelle)) %>%
-    summarise() %>%
-    ungroup() %>%
+      summarise()
+
+  entites_hydro <- entites_hydro %>%
     rmapshaper::ms_simplify(keep = prop_pts_a_garder)
 
   entites_hydro
