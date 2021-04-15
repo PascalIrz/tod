@@ -20,7 +20,7 @@
 #' url <- "https://www.data.gouv.fr/fr/datasets/r/3096e551-c68d-40ce-8972-a228c94c0ad1"
 #' depts <- osm_depts_tod(url = url, repertoire = "raw_data", crs_sortie = 2154)
 #' }
-osm_depts_tod <- function(url, repertoire, crs = NA)
+osm_depts_tod <- function(url, repertoire, crs_sortie = NA)
 
 {
   # Téchargement du shapefile des contours des départements
@@ -43,9 +43,10 @@ osm_depts_tod <- function(url, repertoire, crs = NA)
   depts <- rgdal::readOGR(shp_depts, use_iconv = TRUE) %>%
     sf::st_as_sf()
 
-  if (!is.na(crs))
+  if (!is.na(crs_sortie))
 
   {
+
     depts <- depts %>%
       sf::st_transform(crs = crs_sortie)
 
