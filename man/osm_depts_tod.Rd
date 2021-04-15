@@ -4,12 +4,15 @@
 \alias{osm_depts_tod}
 \title{Télécharger les contours des départements}
 \usage{
-osm_depts_tod(url, repertoire)
+osm_depts_tod(url, repertoire, crs = NA)
 }
 \arguments{
-\item{url}{URL de téléchargement.}
+\item{url}{Texte. URL de téléchargement.}
 
-\item{repertoire}{Chemin vers le répertoire où le fichier sera stocké.}
+\item{repertoire}{Texte. Chemin vers le répertoire où le fichier sera stocké.}
+
+\item{crs}{Numérique. Identifiant EPSG du CRS de sortie. Par défaut le CRS de sortie
+est le même que le shapefile d'origie.}
 }
 \value{
 Un objet sf polygone des départements.
