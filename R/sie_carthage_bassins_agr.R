@@ -8,7 +8,7 @@
 #'     et "Region_Hydro".
 #' @param bassin_geo_poly Objet de classe sf contenant les polygones délimitant les
 #'     Zones HYdro. Typiquement produit par la fonction tod::sie_carthage_bassins_tod().
-#' @param prop_pts_a_garder Nombre entre zéro et 1 (défaut 0.05) indiquant la proportions de points
+#' @param prop_pts_a_garder Nombre entre zéro et 1 (défaut 1) indiquant la proportions de points
 #'     à conserver pour simplifier les contours une fois les Zones Hydro agrégées.
 #'
 #' @return Objet de classe sf contenant les polygones au niveau de découpage des
@@ -28,7 +28,7 @@
 sie_carthage_bassins_agr <- function(bassin_geo_poly,
                                      echelle = c("Zone_Hydro", "Sous_Secteur_Hydro",
                                                "Secteur_Hydro", "Region_Hydro"),
-                                     prop_pts_a_garder = 0.05)
+                                     prop_pts_a_garder = 1)
 
 {
 
