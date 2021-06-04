@@ -4,6 +4,10 @@
 #'     du package {tod}, qui est volumineux (+ de 6000 polygones), permet d'agréger les
 #'     Zones HYdro en Sous-secteurs Hydro, Secteurs Hydro ou Régions hydro.
 #'
+#' NB : Pour l'échelle du district hydrographique, il est nécessaire d'avoir attribué à chaque
+#'     polygone le code et le libellé de son district dans des variables respectivement
+#'     nommées "CdDistrictHy" et "LbDistrictHy".
+#'
 #' @param echelle Caractère. Au choix entre "Zone_Hydro", "Sous_Secteur_Hydro", "Secteur_Hydro"
 #'     et "Region_Hydro".
 #' @param bassin_geo_poly Objet de classe sf contenant les polygones délimitant les
@@ -27,7 +31,8 @@
 #' }
 sie_carthage_bassins_agr <- function(bassin_geo_poly,
                                      echelle = c("Zone_Hydro", "Sous_Secteur_Hydro",
-                                               "Secteur_Hydro", "Region_Hydro"),
+                                               "Secteur_Hydro", "Region_Hydro",
+                                               "District_hydro"),
                                      prop_pts_a_garder = 1)
 
 {
@@ -54,6 +59,12 @@ sie_carthage_bassins_agr <- function(bassin_geo_poly,
   {
     code <- "CdRegionHy"
     libelle <- "LbRegionHy"
+  }
+
+  if(echelle == "District_Hydro")
+  {
+    code <- "CdDistrictHy"
+    libelle <- "LbDistrictHy"
   }
 
   entites_hydro <- bassin_geo_poly %>%
