@@ -6,8 +6,9 @@
 \usage{
 sie_carthage_bassins_agr(
   bassin_geo_poly,
-  echelle = c("Zone_Hydro", "Sous_Secteur_Hydro", "Secteur_Hydro", "Region_Hydro"),
-  prop_pts_a_garder = 0.05
+  echelle = c("Zone_Hydro", "Sous_Secteur_Hydro", "Secteur_Hydro", "Region_Hydro",
+    "District_hydro"),
+  prop_pts_a_garder = 1
 )
 }
 \arguments{
@@ -17,7 +18,7 @@ Zones HYdro. Typiquement produit par la fonction tod::sie_carthage_bassins_tod()
 \item{echelle}{Caractère. Au choix entre "Zone_Hydro", "Sous_Secteur_Hydro", "Secteur_Hydro"
 et "Region_Hydro".}
 
-\item{prop_pts_a_garder}{Nombre entre zéro et 1 (défaut 0.05) indiquant la proportions de points
+\item{prop_pts_a_garder}{Nombre entre zéro et 1 (défaut 1) indiquant la proportions de points
 à conserver pour simplifier les contours une fois les Zones Hydro agrégées.}
 }
 \value{
@@ -28,6 +29,11 @@ Objet de classe sf contenant les polygones au niveau de découpage des
 A partir du découpage le plus fin proposé par la fonction sie_carthage_bassins_tod()
     du package {tod}, qui est volumineux (+ de 6000 polygones), permet d'agréger les
     Zones HYdro en Sous-secteurs Hydro, Secteurs Hydro ou Régions hydro.
+}
+\details{
+NB : Pour l'échelle du district hydrographique, il est nécessaire d'avoir attribué à chaque
+    polygone le code et le libellé de son district dans des variables respectivement
+    nommées "CdDistrictHy" et "LbDistrictHy".
 }
 \examples{
 \dontrun{
