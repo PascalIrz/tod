@@ -17,7 +17,7 @@ url_sandre$query <- list(service = "wfs",
 request_sandre <- build_url(url_sandre)
 
 # couches
-bv_spe_me_surf <- sf::st_read(request_sandre, layer = "BVSpeMasseDEauSurface_VEDL2019_FXX")
+#bv_spe_me_surf <- sf::st_read(request_sandre, layer = "BVSpeMasseDEauSurface_VEDL2019_FXX")
 bassins_dce <- sf::st_read(request_sandre, layer = "BassinDCE")
 
 
@@ -30,15 +30,15 @@ wfs_zpl <- "https://services.sandre.eaufrance.fr/geo/zpl?"
 url_zpl <- parse_url(wfs_zpl)
 
 url_zpl$query <- list(service = "wfs",
-                         version = "2.0.0", # facultative
-                         request = "GetCapabilities"
+                      version = "2.0.0", # facultative
+                      request = "GetCapabilities"
 )
 
 request_zpl <- build_url(url_zpl)
 
 # couches
 sages <- sf::st_read(request_zpl,
-                              layer = "SAGE_FXX")
+                     layer = "SAGE_FXX")
 
 mapview::mapview(sages)
 

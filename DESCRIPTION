@@ -1,7 +1,7 @@
 Package: tod
 Type: Package
 Title: Easy import of some French open data sets with emphasis on environmental issues
-Version: 0.1.0.9001
+Version: 0.1.1
 Author: Pascal Irz <pascal.irz@ofb.gouv.fr>
 Maintainer: Pascal Irz <pascal.irz@ofb.gouv.fr>
 Description: The name tod stands for "telechargement open data". Package facilitant l'accès
@@ -9,7 +9,7 @@ Description: The name tod stands for "telechargement open data". Package facilit
 License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Imports: curl,
     dplyr,
     httr,
@@ -26,4 +26,3 @@ Imports: curl,
 Suggests: 
     knitr,
     rmarkdown
-
