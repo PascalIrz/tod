@@ -1,9 +1,13 @@
-#' Title
+#' Correspondance départements - régions
 #'
-#' @param url
+#' @param url Caractère. URL de l'API géo "départements"
 #'
-#' @return
+#' @return Un dataframe indiquant l'appartenance des départements aux régions
 #' @export
+#'
+#' @importFrom httr GET content content_type_json
+#' @importFrom jsonlite fromJSON
+#' @importFrom dplyr select
 #'
 #' @examples
 #' \dontrun{

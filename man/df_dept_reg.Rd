@@ -2,20 +2,20 @@
 % Please edit documentation in R/df_dept_reg.R
 \name{df_dept_reg}
 \alias{df_dept_reg}
-\title{Title}
+\title{Correspondance départements - régions}
 \usage{
 df_dept_reg(
   url = "https://geo.api.gouv.fr/departements?fields=nom,code,codeRegion,region"
 )
 }
 \arguments{
-\item{url}{}
+\item{url}{Caractère. URL de l'API géo "départements"}
 }
 \value{
-
+Un dataframe indiquant l'appartenance des départements aux régions
 }
 \description{
-Title
+Correspondance départements - régions
 }
 \examples{
 \dontrun{

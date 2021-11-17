@@ -1,0 +1,34 @@
+#' Requêter le flux WFS zonage de plannification (ZPL)
+#'
+#' @param url_wfs Caractère. URL du flux WFS du ZPL
+#' @param couche Caractère. Nom de la couche à charger.
+#'
+#' @return Un objet de classe sf correspondant à la couche choisie.
+#' @export
+#'
+#' @importFrom sf st_read
+#' @importFrom httr parse_url build_url
+#'
+#' @examples
+#' \dontrun{
+#' sages <- sf_zpl(couche = "SAGE_FXX")
+#' }
+sf_zpl <- function(url_wfs = "https://services.sandre.eaufrance.fr/geo/zpl?",
+                   couche)
+
+{
+
+  url <- parse_url(url_wfs)
+
+  url$query <- list(service = "wfs",
+                    version = "2.0.0", # facultative
+                    request = "GetCapabilities")
+
+  requete <- build_url(url)
+
+  st_read(request_sandre,
+          layer = couche)
+
+
+}
+
