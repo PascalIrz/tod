@@ -4,10 +4,10 @@
 \alias{ign_urba_net_rep}
 \title{Nettoyer les répertoires de données brutes (suppression des shapefiles vides).}
 \usage{
-ign_urba_net_rep(repertoire, seuil_ko = 2)
+ign_urba_net_rep(repertoire_donnees_brutes, seuil_ko = 2)
 }
 \arguments{
-\item{repertoire}{Texte. Chemin vers le répertoire où sont stockés les shapefiles.}
+\item{repertoire_donnees_brutes}{Texte. Chemin vers le répertoire où sont stockés les shapefiles.}
 
 \item{seuil_ko}{Numérique. Valeur seuil de taille des fichiers shapefiles au-dessous
 de laquelle ils seront considérés comme vides et supprimés.}
@@ -20,6 +20,6 @@ Nettoyer les répertoires de données brutes (suppression des shapefiles vides).
 }
 \examples{
 \dontrun{
-ign_urba_net_rep(repertoire = "raw_data/prescription_surf")
+ign_urba_net_rep(repertoire_donnees_brutes = "raw_data/prescription_surf")
 }
 }

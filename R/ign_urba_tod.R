@@ -16,7 +16,7 @@
 #' @param nb_elements_par_telech Numérique. Nombre d'éléments à télécharger par paquet.
 #' @param n_tot_elements_a_telech Numérique. Si l'on le connaît, le nombre total d'éléments
 #'     géographiques à télécharger.
-#' @param repertoire Texte. Chemin vers le répertoire de stockage des fichiers téléchargés.
+#' @param repertoire_donnees_brutes Texte. Chemin vers le répertoire de stockage des fichiers téléchargés.
 #'     Par défaut, c'est un sous répertoire de "raw_data" nommé d'après la couche. S'il n'existe
 #'     pas, la fonction le crée.
 #'
@@ -34,13 +34,14 @@
 #' ymin = 47,
 #' xmax = -2,
 #' ymax = 48,
-#' repertoire = "raw_data/prescription_lin")
+#' repertoire_donnees_brutes = "raw_data/prescription_lin")
 #' }
 ign_urba_tod <- function(couche,
                          ymin, xmin, ymax, xmax,
-    #                     scr =   4326,
-                         index_debut = 0, nb_elements_par_telech = 10000,
-                         n_tot_elements_a_telech = 1e6, repertoire = NA)
+                         index_debut = 0,
+                         nb_elements_par_telech = 10000,
+                         n_tot_elements_a_telech = 1e6,
+                         repertoire_donnees_brutes = NA)
 
 {
 
@@ -54,12 +55,12 @@ ign_urba_tod <- function(couche,
   scr <- 4326
 
   # Répertoire de stockage des données. S'il n'est pas spécifié, il est nommé d'après la couche et éventuellement créé
-  if(is.na(repertoire))
+  if(is.na(repertoire_donnees_brutes))
   {
-    repertoire <- paste0("raw_data/", couche)
+    repertoire_donnees_brutes <- paste0("raw_data/", couche)
   }
 
-  if(dir.exists(repertoire) == FALSE) dir.create(repertoire)
+  if(dir.exists(repertoire_donnees_brutes) == FALSE) dir.create(repertoire_donnees_brutes)
 
   # Création de vecteurs contenant autant d'éléments qu'il y aura de paquets à télécharger
   startindexes <- seq(from = index_debut,
@@ -76,7 +77,7 @@ ign_urba_tod <- function(couche,
                      url_base_6)
 
   indices <- 1:length(requetes)
-  chemins <- paste0(repertoire, "/fichier_", indices, ".zip")
+  chemins <- paste0(repertoire_donnees_brutes, "/fichier_", indices, ".zip")
 
   # Boucle sur les batch
   for(i in indices[1:length(indices)]) {

@@ -13,7 +13,7 @@ ign_urba_tod(
   index_debut = 0,
   nb_elements_par_telech = 10000,
   n_tot_elements_a_telech = 1e+06,
-  repertoire = NA
+  repertoire_donnees_brutes = NA
 )
 }
 \arguments{
@@ -34,7 +34,7 @@ ign_urba_tod(
 \item{n_tot_elements_a_telech}{Numérique. Si l'on le connaît, le nombre total d'éléments
 géographiques à télécharger.}
 
-\item{repertoire}{Texte. Chemin vers le répertoire de stockage des fichiers téléchargés.
+\item{repertoire_donnees_brutes}{Texte. Chemin vers le répertoire de stockage des fichiers téléchargés.
 Par défaut, c'est un sous répertoire de "raw_data" nommé d'après la couche. S'il n'existe
 pas, la fonction le crée.}
 }
@@ -57,6 +57,6 @@ xmin = -7,
 ymin = 47,
 xmax = -2,
 ymax = 48,
-repertoire = "raw_data/prescription_lin")
+repertoire_donnees_brutes = "raw_data/prescription_lin")
 }
 }

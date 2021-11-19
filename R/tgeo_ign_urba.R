@@ -21,9 +21,9 @@
 #' @param repertoire_donnees_brutes Texte. Chemin vers le répertoire de stockage des fichiers téléchargés.
 #'     Par défaut, c'est un sous-répertoire de "raw_data" nommé d'après la couche. S'il n'existe
 #'     pas, la fonction le crée.
-#' @param fichier_sortie Texte. Chemin vers le fichier shapefile de sortie.
-#'     Par défaut, il est dans un sous-répertoire de "processed_data" nommé d'après la couche. S'il n'existe
-#'     pas, la fonction crée ce sous-répertoire.
+#' @param repertoire_sortie Texte. Chemin vers le fichier répertoire où le fichier
+#'     sera écrit.
+#' @param nom_fichier_sortie Texte. Nom du fichier de sortie avec son extension .shp.
 #' @param seuil_ko Numérique. Valeur seuil de taille des fichiers shapefiles au-dessous
 #'     de laquelle ils seront considérés comme vides et supprimés.
 #'
@@ -40,7 +40,7 @@
 #' repertoire_donnees_brutes <- "raw_data/prescription_lin"
 #' fichier_donnees_traitees <- "processed_data/prescription_lin.shp"
 
-#' ign_urba_api_shp(couche = ma_couche,
+#' tgeo_ign_urba(couche = ma_couche,
 #'                  xmin = -7,
 #'                  ymin = 47,
 #'                  xmax = -4,
@@ -48,38 +48,65 @@
 #'                  repertoire_donnees_brutes = repertoire_donnees_brutes,
 #'                  fichier_sortie = fichier_donnees_traitees)
 #' }
-ign_urba_api_shp <- function(couche,
-                             ymin, xmin, ymax, xmax,
-                             scr = 4326,
-                             index_debut = 0,
-                             nb_elements_par_telech = 10000,
-                             n_tot_elements_a_telech = 1e6,
-                             repertoire_donnees_brutes = NA,
-                             fichier_sortie = NA,
-                             seuil_ko = 2)
+tgeo_ign_urba <- function(couche,
+                          ymin, xmin, ymax, xmax,
+                          scr = 4326,
+                          index_debut = 0,
+                          nb_elements_par_telech = 10000,
+                          n_tot_elements_a_telech = 1e6,
+                          repertoire_donnees_brutes = "raw_data",
+                          repertoire_sortie = NA,
+                          nom_fichier_sortie = "ign_urba.shp",
+                          seuil_ko = 2)
 
 {
 
+  # création si besoin du répertoire de stockage des données brutes
+    if (!dir.exists(repertoire_donnees_brutes))
+    {
+      dir.create(repertoire_donnees_brutes)
+    }
 
+  # téléchargement des données brutes par batch
   tod::ign_urba_tod(couche = couche,
                     xmin = xmin,
                     ymin = ymin,
                     xmax = xmax,
                     ymax = ymax,
-                    repertoire = repertoire_donnees_brutes)
+                    repertoire_donnees_brutes = repertoire_donnees_brutes)
 
-  tod::ign_urba_dec(repertoire = repertoire_donnees_brutes)
+  # décompression des données brutes
+  tod::ign_urba_dec(repertoire_donnees_brutes = repertoire_donnees_brutes)
 
-  tod::ign_urba_net_rep(repertoire = repertoire_donnees_brutes,
-                   seuil_ko = seuil_ko)
+  # nettoyage du répertoire de stockage des données brutes
+  tod::ign_urba_net_rep(repertoire_donnees_brutes = repertoire_donnees_brutes,
+                        seuil_ko = seuil_ko)
 
-  sf_liste <- tod::ign_urba_lire_shapes(repertoire = repertoire_donnees_brutes)
+  # lecture des fichiers
+  sf_liste <- ign_urba_lire_shapes(repertoire_donnees_brutes = repertoire_donnees_brutes)
 
+  # assemblage des fichiers
   assemblage <- ign_urba_assembler_sf(liste_sf = sf_liste)
 
-  ign_urba_sauver_shape(objet_sf = assemblage,
-                        chemin = fichier_sortie,
-                        scr = scr)
+
+  # sauvegarde du shapefile assemblé (slt si repertoire_sortie est précisé)
+  if (is.na(repertoire_sortie))
+
+    {
+    repertoire_sortie <- repertoire_donnees_brutes
+    }
+
+  if (!dir.exists(repertoire_sortie))
+    {
+    dir.create(repertoire_sortie)
+    }
+
+    ign_urba_sauver_shape(objet_sf = assemblage,
+                          repertoire_sortie = repertoire_sortie,
+                          nom_fichier_sortie = nom_fichier_sortie,
+                          scr = scr)
+
+  return(assemblage)
 
 
 }

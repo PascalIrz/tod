@@ -4,10 +4,10 @@
 \alias{ign_urba_lire_shapes}
 \title{Lire les fichiers shapefiles contenus dans un répertoire}
 \usage{
-ign_urba_lire_shapes(repertoire)
+ign_urba_lire_shapes(repertoire_donnees_brutes)
 }
 \arguments{
-\item{repertoire}{Texte. Chemin vers le répertoire où sont stockés les shapefiles.}
+\item{repertoire_donnees_brutes}{Texte. Chemin vers le répertoire où sont stockés les shapefiles.}
 }
 \value{
 Une liste contenant un objet de classe sf par shapefile.
@@ -17,6 +17,6 @@ Lire les fichiers shapefiles contenus dans un répertoire
 }
 \examples{
 \dontrun{
-sf_liste <- ign_urba_lire_shapes(repertoire = "raw_data/prescription_surf")
+sf_liste <- ign_urba_lire_shapes(repertoire_donnees_brutes = "raw_data/prescription_surf")
 }
 }

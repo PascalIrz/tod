@@ -4,10 +4,10 @@
 \alias{ign_urba_dec}
 \title{Décompresser les fichiers zip de l'API portail de l'urbanisme.}
 \usage{
-ign_urba_dec(repertoire)
+ign_urba_dec(repertoire_donnees_brutes)
 }
 \arguments{
-\item{repertoire}{Texte. Chemin vers le répertoire où sont stockés les fichiers
+\item{repertoire_donnees_brutes}{Texte. Chemin vers le répertoire où sont stockés les fichiers
 compressés.}
 }
 \value{
@@ -18,6 +18,6 @@ Décompresser les fichiers zip de l'API portail de l'urbanisme.
 }
 \examples{
 \dontrun{
-dec_ign_urba(repertoire = "raw_data/prescription_surf")
+dec_ign_urba(repertoire_donnees_brutes = "raw_data/prescription_surf")
 }
 }

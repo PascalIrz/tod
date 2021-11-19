@@ -4,12 +4,12 @@
 \alias{osm_communes_tod}
 \title{Télécharger les contours des communes}
 \usage{
-osm_communes_tod(url, repertoire, crs_sortie = NA)
+osm_communes_tod(url, repertoire_donnees_brutes, crs_sortie = NA)
 }
 \arguments{
 \item{url}{Texte. URL de téléchargement du fichier GeoJSON.}
 
-\item{repertoire}{Texte. Chemin vers le répertoire où le fichier sera stocké.}
+\item{repertoire_donnees_brutes}{Texte. Chemin vers le répertoire où le fichier sera stocké.}
 
 \item{crs_sortie}{Numérique. Identifiant EPSG du CRS de sortie. Par défaut le CRS de sortie
 est le même que celui du shapefile d'origine.}
@@ -24,6 +24,6 @@ Cette fonction télécharge depuis la plateforme data.gouv.fr une couche simplif
 \examples{
 \dontrun{
 url <- "https://www.data.gouv.fr/fr/datasets/r/07b7c9a2-d1e2-4da6-9f20-01a7b72d4b12"
-contours <- osm_communes_tod(url = url, repertoire = "raw_data", crs_sortie = 2154)
+contours <- osm_communes_tod(url = url, repertoire_donnees_brutes = "raw_data", crs_sortie = 2154)
 }
 }

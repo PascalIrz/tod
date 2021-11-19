@@ -1,6 +1,6 @@
 #' Nettoyer les répertoires de données brutes (suppression des shapefiles vides).
 #'
-#' @param repertoire Texte. Chemin vers le répertoire où sont stockés les shapefiles.
+#' @param repertoire_donnees_brutes Texte. Chemin vers le répertoire où sont stockés les shapefiles.
 #' @param seuil_ko Numérique. Valeur seuil de taille des fichiers shapefiles au-dessous
 #'     de laquelle ils seront considérés comme vides et supprimés.
 #'
@@ -11,11 +11,11 @@
 #'
 #' @examples
 #' \dontrun{
-#' ign_urba_net_rep(repertoire = "raw_data/prescription_surf")
+#' ign_urba_net_rep(repertoire_donnees_brutes = "raw_data/prescription_surf")
 #' }
-ign_urba_net_rep <- function(repertoire, seuil_ko = 2) {
+ign_urba_net_rep <- function(repertoire_donnees_brutes, seuil_ko = 2) {
 
-  shapefiles <- list.files(repertoire,
+  shapefiles <- list.files(repertoire_donnees_brutes,
                            pattern = ".shp$",
                            recursive = TRUE,
                            full.names = TRUE)
