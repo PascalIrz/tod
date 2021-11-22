@@ -14,7 +14,7 @@ Dans un premier temps, il permet que de manipuler les données :
 - Du Géoportail de l’Urbanisme. Celui-ci offre des services de téléchargement, de consultation ainsi que des API.
 - De la base HYDRO, à partir de l'API Hub'eau.
     
-Très bientôt seront ajoutés des modules dédiée à :
+Très bientôt seront ajoutés des modules dédiés à :
 - La banque nationale des prélèvements quantitatifs en eau (BNPE), à partir de l'API Hub'eau.
 - L'Observatoire National des Etiages, à partir de la page de diffusion de l'OFB.
 - Le découpage administratif de la France à partir de data.gouv.fr
