@@ -14,11 +14,9 @@
 #'
 #' @examples
 #' \dontrun{
-#' correspondance <- ttab_dept_reg()
-#' depts <- depts %>%
-#'   left_join(correspondance, by = c("code_insee" = "code"))
+#' correspondance <- ttab_geoapi_dept_reg()
 #' }
-ttab_dept_reg <-
+ttab_geoapi_dept_reg <-
   function(url = "https://geo.api.gouv.fr/departements?fields=nom,code,codeRegion,region",
            repertoire_donnees_brutes = NA)
 
