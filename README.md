@@ -1,6 +1,4 @@
-<!-- badges: start -->
-[![R-CMD-check](https://github.com/PascalIrz/tod/workflows/R-CMD-check/badge.svg)](https://github.com/PascalIrz/tod/actions)
-<!-- badges: end -->
+[![R](https://github.com/PascalIrz/tod/actions/workflows/R-CMD-check.yml/badge.svg)](https://github.com/PascalIrz/tod/actions/workflows/R-CMD-check.yml)
 
 
 # tod
