@@ -28,14 +28,14 @@ ign_urba_sauver_shape <- function(objet_sf, scr = NA, repertoire_sortie, nom_fic
 
             {
     objet_sf <- objet_sf %>%
-      sf::st_transform(crs = scr)
+      st_transform(crs = scr)
 
   }
 
   chemin_fichier <- paste(repertoire_sortie, nom_fichier_sortie, sep = "/")
 
   objet_sf %>%
-    sf::st_write(dsn = chemin_fichier,
+    st_write(dsn = chemin_fichier,
                  append = FALSE)
 
           }

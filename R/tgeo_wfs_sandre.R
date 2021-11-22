@@ -38,27 +38,29 @@ tgeo_wfs_sandre <- function(url_wfs,
 
   # chargement des données
   sf_data <- st_read(requete,
-                  layer = couche)
+                     layer = couche)
 
   # création si besoin du répertoire de stockage des données brutes
-  if(!is.na(repertoire_donnees_brutes))
-  {
-
-      if (!dir.exists(repertoire_donnees_brutes))
-  {
-    dir.create(repertoire_donnees_brutes)
-      }
-
-    chemin_fichier <- paste0(repertoire_donnees_brutes,
-                             "_",
-                             couche,
-                             ".shp")
-
-    sf_data %>%
-      sf::st_write(dsn = chemin_fichier,
-                   append = FALSE)
-  }
-
+  # if(!is.na(repertoire_donnees_brutes))
+  # {
+  #
+  #     if (!dir.exists(repertoire_donnees_brutes))
+  # {
+  #   dir.create(repertoire_donnees_brutes)
+  #     }
+  #
+  #   chemin_fichier <- paste0(repertoire_donnees_brutes,
+  #                            "_",
+  #                            couche,
+  #                            ".shp")
+  #
+  #   sf_data %>%
+  #     st_write(dsn = chemin_fichier,
+  #              append = FALSE)
+  # }
+  int_sauver_sf_shp(sf_data = sf_data,
+                    repertoire_donnees_brutes = repertoire_donnees_brutes,
+                    couche = couche)
 
 
   return(sf_data)

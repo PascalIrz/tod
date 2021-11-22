@@ -54,7 +54,7 @@ ofb_bnpe_pp_tod <-
     url_base <-
       "https://hubeau.eaufrance.fr/api/vbeta/prelevements/referentiel/points_prelevement?"
 
-    data <- httr::GET(
+    data <- GET(
       url_base,
       query = list(
         bbox = bbox,
@@ -78,12 +78,12 @@ ofb_bnpe_pp_tod <-
       )
     )
 
-    httr::warn_for_status(data)
-    httr::stop_for_status(data)
+    warn_for_status(data)
+    stop_for_status(data)
 
     data %>%
-      httr::content(as = 'text') %>%
-      jsonlite::fromJSON() %>%
+      content(as = 'text') %>%
+      fromJSON() %>%
       .$data
 
   }

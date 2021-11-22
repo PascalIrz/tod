@@ -36,7 +36,7 @@ sie_carthage_bassins_tod <- function(url = NA, repertoire = "raw_data") {
 
   shp_bv <- paste0(repertoire, "/ZoneHydro_FXX.shp")
 
-  bv <- sf::read_sf(shp_bv)
+  bv <- read_sf(shp_bv)
 
   bv
 

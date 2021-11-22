@@ -24,12 +24,12 @@ ign_urba_lire_shapes <- function(repertoire_donnees_brutes)
 
   # lecture avec rgdal qui gère mieux l'encodage que sf
   sf_list <- map(.x = shapefiles,
-                 .f = rgdal::readOGR,
+                 .f = readOGR,
                  use_iconv = TRUE,
                  encoding = "UTF-8")
 
   # passage en sf
   map(.x = sf_list,
-      .f = sf::st_as_sf)
+      .f = st_as_sf)
 
               }

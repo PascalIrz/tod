@@ -6,7 +6,8 @@
 \usage{
 sf_geobretagne(
   url_wfs = "https://geobretagne.fr/geoserver/dreal_b/sage_dreal/wfs?",
-  couche
+  couche,
+  repertoire_donnees_brutes = NA
 )
 }
 \arguments{

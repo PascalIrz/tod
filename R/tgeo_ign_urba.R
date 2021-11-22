@@ -49,7 +49,10 @@
 #'                  fichier_sortie = fichier_donnees_traitees)
 #' }
 tgeo_ign_urba <- function(couche,
-                          ymin, xmin, ymax, xmax,
+                          ymin,
+                          xmin,
+                          ymax,
+                          xmax,
                           scr = 4326,
                           index_debut = 0,
                           nb_elements_par_telech = 10000,
@@ -60,30 +63,32 @@ tgeo_ign_urba <- function(couche,
                           seuil_ko = 2)
 
 {
-
   # création si besoin du répertoire de stockage des données brutes
-    if (!dir.exists(repertoire_donnees_brutes))
-    {
-      dir.create(repertoire_donnees_brutes)
-    }
+  if (!dir.exists(repertoire_donnees_brutes))
+  {
+    dir.create(repertoire_donnees_brutes)
+  }
 
   # téléchargement des données brutes par batch
-  tod::ign_urba_tod(couche = couche,
-                    xmin = xmin,
-                    ymin = ymin,
-                    xmax = xmax,
-                    ymax = ymax,
-                    repertoire_donnees_brutes = repertoire_donnees_brutes)
+  ign_urba_tod(
+    couche = couche,
+    xmin = xmin,
+    ymin = ymin,
+    xmax = xmax,
+    ymax = ymax,
+    repertoire_donnees_brutes = repertoire_donnees_brutes
+  )
 
   # décompression des données brutes
-  tod::ign_urba_dec(repertoire_donnees_brutes = repertoire_donnees_brutes)
+  ign_urba_dec(repertoire_donnees_brutes = repertoire_donnees_brutes)
 
   # nettoyage du répertoire de stockage des données brutes
-  tod::ign_urba_net_rep(repertoire_donnees_brutes = repertoire_donnees_brutes,
-                        seuil_ko = seuil_ko)
+  ign_urba_net_rep(repertoire_donnees_brutes = repertoire_donnees_brutes,
+                   seuil_ko = seuil_ko)
 
   # lecture des fichiers
-  sf_liste <- ign_urba_lire_shapes(repertoire_donnees_brutes = repertoire_donnees_brutes)
+  sf_liste <-
+    ign_urba_lire_shapes(repertoire_donnees_brutes = repertoire_donnees_brutes)
 
   # assemblage des fichiers
   assemblage <- ign_urba_assembler_sf(liste_sf = sf_liste)
@@ -92,19 +97,21 @@ tgeo_ign_urba <- function(couche,
   # sauvegarde du shapefile assemblé (slt si repertoire_sortie est précisé)
   if (is.na(repertoire_sortie))
 
-    {
+  {
     repertoire_sortie <- repertoire_donnees_brutes
-    }
+  }
 
   if (!dir.exists(repertoire_sortie))
-    {
+  {
     dir.create(repertoire_sortie)
-    }
+  }
 
-    ign_urba_sauver_shape(objet_sf = assemblage,
-                          repertoire_sortie = repertoire_sortie,
-                          nom_fichier_sortie = nom_fichier_sortie,
-                          scr = scr)
+  ign_urba_sauver_shape(
+    objet_sf = assemblage,
+    repertoire_sortie = repertoire_sortie,
+    nom_fichier_sortie = nom_fichier_sortie,
+    scr = scr
+  )
 
   return(assemblage)
 

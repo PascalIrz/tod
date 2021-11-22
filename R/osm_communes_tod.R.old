@@ -35,14 +35,14 @@ osm_communes_tod <- function(url, repertoire_donnees_brutes, crs_sortie = NA)
 
   geojson_communes <- paste0(repertoire_donnees_brutes, "/communes-20190101.json")
 
-  communes <- sf::read_sf(geojson_communes)
+  communes <- read_sf(geojson_communes)
 
   if (!is.na(crs_sortie))
 
   {
 
     communes <- communes %>%
-      sf::st_transform(crs = crs_sortie)
+      st_transform(crs = crs_sortie)
 
   }
 

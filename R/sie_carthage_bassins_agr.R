@@ -72,7 +72,7 @@ sie_carthage_bassins_agr <- function(bassin_geo_poly,
       summarise()
 
   entites_hydro <- entites_hydro %>%
-    rmapshaper::ms_simplify(keep = prop_pts_a_garder)
+    ms_simplify(keep = prop_pts_a_garder)
 
   entites_hydro
 

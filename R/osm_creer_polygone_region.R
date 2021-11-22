@@ -33,16 +33,16 @@ osm_creer_polygone_region <- function(departements_sf,
   # au cas où l'utilisateur saisit des départements en numérique
   departements_selectionnes <- departements_selectionnes %>%
     as.character() %>%
-    stringr::str_pad(width = 2,
-                     side = "left",
-                     pad = "0")
+    str_pad(width = 2,
+            side = "left",
+            pad = "0")
 
   # fusion des départements sélectionnés et ajout du buffer
   departements_sf %>%
     filter(code_insee %in% departements_selectionnes) %>%
-    sf::st_combine() %>% # fusion des départements
-    sf::st_buffer(dist = distance_buffer / 200) %>%  # buffer mis à l'échelle du km
-    sf::st_as_sf() %>% # la classe sf est perdue lors des opérations précédentes
+    st_combine() %>% # fusion des départements
+    st_buffer(dist = distance_buffer / 200) %>%  # buffer mis à l'échelle du km
+    st_as_sf() %>% # la classe sf est perdue lors des opérations précédentes
     mutate(region = intitule_region) # rajout de ce champ nécessaire pour le filtrage ultérieur des stations
 }
 
