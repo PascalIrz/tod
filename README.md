@@ -1,4 +1,4 @@
-[![R](https://github.com/PascalIrz/tod/actions/workflows/R-CMD-check.yml/badge.svg)](https://github.com/PascalIrz/tod/actions/workflows/R-CMD-check.yml)
+[![R-CMD-check](https://github.com/PascalIrz/tod/actions/workflows/R-CMD-check.yml/badge.svg)](https://github.com/PascalIrz/tod/actions/workflows/R-CMD-check.yml)
 
 
 # tod
