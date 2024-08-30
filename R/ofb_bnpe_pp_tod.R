@@ -27,6 +27,7 @@
 #'
 #' @importFrom httr GET warn_for_status stop_for_status content
 #' @importFrom jsonlite fromJSON
+#' @importFrom magrittr %>%
 #'
 #' @examples
 #' \dontrun{

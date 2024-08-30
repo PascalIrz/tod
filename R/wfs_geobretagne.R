@@ -1,8 +1,26 @@
-sf_geobretagne <- function(url_wfs = "https://geobretagne.fr/geoserver/dreal_b/sage_dreal/wfs?",
-                           couche)
+#' Accéder au flux WFS GéoBretagne
+#'
+#' @param url_wfs Texte. URL du flux.
+#' @param couche Texte. Nom de la couche. Par défaut "sage_dreal".
+#'
+#' @return L'objet de classe sf retourné par le flux. Par défaut les SAGEs de Bretagne.
+#'
+#' @importFrom sf st_read st_write st_sf st_drop_geometry st_geometry
+#' @importFrom httr parse_url
+#' @importFrom gdalUtilities ogr2ogr
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' sages <- tod::sf_geobretagne()
+#' mapview::mapview(sages)
+#' }
+wfs_geobretagne <- function(url_wfs = "https://geobretagne.fr/geoserver/dreal_b/",
+                            couche = "sage_dreal")
 {
 
-url <- parse_url(url_wfs)
+url <- paste0(url_wfs, couche, "/wfs?")
+url <- parse_url(url)
 
 url$query <- list(service = "wfs",
                   version = "2.0.0", # facultative
@@ -29,5 +47,4 @@ ensure_multipolygons <- function(X)
 sages <- ensure_multipolygons(sages)
 
 }
-
 

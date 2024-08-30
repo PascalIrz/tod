@@ -1,4 +1,6 @@
-[![R-CMD-check](https://github.com/PascalIrz/tod/actions/workflows/R-CMD-check.yml/badge.svg)](https://github.com/PascalIrz/tod/actions/workflows/R-CMD-check.yml)
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/PascalIrz/tod/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/PascalIrz/tod/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
 
 # tod
 Package R pour faciliter le téléchargement d'open data.
