@@ -12,7 +12,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' bassins <- sf_sandre(url_wfs = "https://services.sandre.eaufrance.fr/geo/sandre?",
+#' bassins <- wfs_sandre(url_wfs = "https://services.sandre.eaufrance.fr/geo/sandre?",
 #'                      couche = "BassinDCE")
 #' }
 wfs_sandre <- function(url_wfs,

@@ -19,7 +19,7 @@ Requêter les flux WFS proposés sur www.sandre.eaufrance.fr
 }
 \examples{
 \dontrun{
-bassins <- sf_sandre(url_wfs = "https://services.sandre.eaufrance.fr/geo/sandre?",
+bassins <- wfs_sandre(url_wfs = "https://services.sandre.eaufrance.fr/geo/sandre?",
                      couche = "BassinDCE")
 }
 }
